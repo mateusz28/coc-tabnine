@@ -198,7 +198,8 @@ export async function activate(context: ExtensionContext): Promise<void> {
     if (args.entry.documentation) {
       item.documentation = formatDocumentation(args.entry.documentation)
     }
-    item.detail = args.entry.detail ? args.entry.detail : args.detailMessage
+    //item detail shows full multiline newText content 
+    item.detail = args.entry.detail ? newText : args.detailMessage
     let detail = item.detail || ''
     if (detail == DEFAULT_DETAIL || [
       'Buy a license',
@@ -223,6 +224,8 @@ export async function activate(context: ExtensionContext): Promise<void> {
     if (pre.indexOf('TabNine::') !== -1) {
       item.filterText = pre
     }
+    //label is new_prefix up to newline
+    item.label = `${new_prefix.split('\n')[0]}~`
     return item
   }
 
